@@ -63,14 +63,14 @@ RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cl
 
 RUN curl -L -o kubectl \
         https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
-        && chmod 0700 kubectl \
+        && chmod 0755 kubectl \
         && mv kubectl /usr/bin
 
 RUN curl -L -o helm.tar.gz \
         https://kubernetes-helm.storage.googleapis.com/helm-v${HELM_VERSION}-linux-amd64.tar.gz \
         && tar -xvzf helm.tar.gz \
         && rm -rf helm.tar.gz \
-        && chmod 0700 linux-amd64/helm \
+        && chmod 0755 linux-amd64/helm \
         && mv linux-amd64/helm /usr/bin
 
 RUN curl -o ./terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
@@ -80,7 +80,7 @@ RUN curl -o ./terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM
 
 RUN curl -L -o ./terragrunt \
         https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64 \
-        && chmod 0700 terragrunt \
+        && chmod 0755 terragrunt \
         && mv terragrunt /usr/bin
 
 RUN curl -L -o ./tph.tar.gz \
@@ -89,7 +89,7 @@ RUN curl -L -o ./tph.tar.gz \
         && rm -rf tph.tar.gz \
         && cd terraform-provider-helm_linux_amd64 \
         && mv terraform-provider-helm terraform-provider-helm_v${TERRAFORM_PROVIDER_HELM_VERSION} \
-        && chmod 0700 terraform-provider-helm_v${TERRAFORM_PROVIDER_HELM_VERSION} \
+        && chmod 0755 terraform-provider-helm_v${TERRAFORM_PROVIDER_HELM_VERSION} \
         && mkdir -p /root/.terraform.d/plugins/ \
         && mv terraform-provider-helm_v${TERRAFORM_PROVIDER_HELM_VERSION} /root/.terraform.d/plugins/
 
