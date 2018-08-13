@@ -90,8 +90,8 @@ RUN curl -L -o ./tph.tar.gz \
         && cd terraform-provider-helm_linux_amd64 \
         && mv terraform-provider-helm terraform-provider-helm_v${TERRAFORM_PROVIDER_HELM_VERSION} \
         && chmod 0755 terraform-provider-helm_v${TERRAFORM_PROVIDER_HELM_VERSION} \
-        && mkdir -p /root/.terraform.d/plugins/ \
-        && mv terraform-provider-helm_v${TERRAFORM_PROVIDER_HELM_VERSION} /root/.terraform.d/plugins/
+        && mkdir -p /config/.terraform.d/plugins/ \
+        && mv terraform-provider-helm_v${TERRAFORM_PROVIDER_HELM_VERSION} /config/.terraform.d/plugins/
 
 COPY modules /exekube-modules/
 COPY --from=builder /build/bin/xk /usr/local/bin/
