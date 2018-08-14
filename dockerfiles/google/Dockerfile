@@ -94,6 +94,7 @@ RUN curl -L -o ./tph.tar.gz \
         && mv terraform-provider-helm_v${TERRAFORM_PROVIDER_HELM_VERSION} /config/.terraform.d/plugins/
 
 COPY modules /exekube-modules/
+RUN chmod -R a+rX /exekube-modules
 COPY --from=builder /build/bin/xk /usr/local/bin/
 ENV PATH /exekube-modules/gcp-project-init:/exekube-modules/gcp-secret-mgmt/scripts:$PATH
 
