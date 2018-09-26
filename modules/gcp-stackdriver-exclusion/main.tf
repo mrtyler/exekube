@@ -16,6 +16,15 @@ provider "google" {
 # GOOGLE STACKDRIVER EXCLUSION
 # ------------------------------------------------------------------------------
 
+data "template_file" "my-exclusion-template" {
+  count = "${length(var.exclusions)}"
+  template = "${element(values(var.exclusions), count.index)}"
+
+  vars {
+    project_id = "${var.project_id}"
+  }
+}
+
 resource "google_logging_project_exclusion" "my-exclusion" {
   count  = "${length(var.exclusions)}"
   name   = "${element(keys(var.exclusions), count.index)}"
@@ -28,9 +37,5 @@ resource "google_logging_project_exclusion" "my-exclusion" {
   # instance of this module declares its filters. Hence, this workaround to
   # replace the string "__var.project_id__" with the value of ${var.project_id}
   # at runtime.
-  filter = "${replace(
-              element(values(var.exclusions), count.index),
-              "__var.project_id__",
-              "${var.project_id}"
-            )}"
+  filter = "${element(data.template_file.my-exclusion-template.*.rendered, count.index)}"
 }
