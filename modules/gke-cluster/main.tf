@@ -108,4 +108,8 @@ EOF
     update = "${var.update_timeout}"
     delete = "${var.delete_timeout}"
   }
+
+  lifecycle {
+    prevent_destroy = "${var.prevent_destroy_cluster}"
+  }
 }

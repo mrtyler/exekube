@@ -100,3 +100,7 @@ variable "update_timeout" {
 variable "delete_timeout" {
   default = "10m"
 }
+
+variable "prevent_destroy_cluster" {
+  default = false
+}
